@@ -1,6 +1,6 @@
-package org.example.repository;
+package com.gitforgits.repository;
 
-import org.example.dto.Book;
+import com.gitforgits.model.Book;
 import org.springframework.data.repository.CrudRepository;
 
 public interface BookRepository extends CrudRepository<Book, Long> {

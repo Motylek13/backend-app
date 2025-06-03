@@ -1,6 +1,6 @@
-package org.example.configs;
+package com.gitforgits.configs;
 
-import org.example.service.GreetingService;
+import com.gitforgits.service.GreetingService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
