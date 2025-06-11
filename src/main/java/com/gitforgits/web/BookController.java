@@ -28,5 +28,26 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity updateBook(@PathVariable Long id, @RequestBody Book book){
+        return bookService.getBookById(id)
+                .map(existing -> {
+                    existing.setTitle(book.getTitle());
+                    existing.setAuthor(book.getAuthor());
+                    existing.setDescription(book.getDescription());
+                    Book saved = bookService.saveBook(existing);
+                    return ResponseEntity.ok(saved);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteBook(@PathVariable Long id){
+        if (bookService.deleteBookById(id)){
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }

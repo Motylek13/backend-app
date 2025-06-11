@@ -34,6 +34,12 @@
             <version>2.1.214</version>
         </dependency>
 
+        <!-- Redis starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <!-- Data Starter  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
