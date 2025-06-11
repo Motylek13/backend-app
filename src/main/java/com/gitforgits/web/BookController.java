@@ -6,6 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:5175")
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
@@ -15,6 +18,12 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<Book>> findAll(){
+        List<Book> books = bookService.findAll();
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity getBook(@PathVariable Long id){
         return bookService.getBookById(id)
@@ -22,7 +31,7 @@ public class BookController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity createBook(@RequestBody Book book){
         Book saved = bookService.saveBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
