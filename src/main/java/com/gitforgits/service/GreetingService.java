@@ -1,4 +1,4 @@
-package org.example.service;
+package com.gitforgits.service;
 
 public class GreetingService {
     public String greet(){
