@@ -4,15 +4,13 @@ import com.gitforgits.model.Author;
 import com.gitforgits.model.Book;
 import com.gitforgits.repository.AuthorRepository;
 import com.gitforgits.repository.BookRepository;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class BookService {
@@ -45,6 +43,7 @@ public class BookService {
         return !repository.existsById(id);
     }
 
+    @CacheEvict(value = "books", key = "#book.id")
     public Optional<Book> updateBook(final Long id, final Book updatedData) {
         return repository.findById(id).map(existing -> {
             existing.setTitle(updatedData.getTitle());
